@@ -1,16 +1,12 @@
 package com.example.navwithsafeargs
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.example.navwithsafeargs.databinding.ActivityMainBinding
 
@@ -27,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         // update UI component with navigation UI
         val navController = findNavController(R.id.myNavHostFragment)
 
-
         appBarConfiguration = AppBarConfiguration(navGraph = navController.graph)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
@@ -35,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setupWithNavController(navController)
 
 
-        // setup and display navigation drawer
-        NavigationUI.setupWithNavController(binding.navView, navController)
+        // setup and display navigation drawer without hamburger icon!
+//        NavigationUI.setupWithNavController(binding.navView, navController)
 
         // show hamburger icon
         drawerLayout = binding.drawerLayout
@@ -52,16 +47,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    // setup menu
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = findNavController(R.id.myNavHostFragment)
-
-        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-    }
 }

@@ -2,15 +2,14 @@ package com.example.navwithsafeargs
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import com.example.navwithsafeargs.databinding.FragmentHomeBinding
 
 
@@ -27,7 +26,12 @@ class HomeFragment : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-        val binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
+        val binding = DataBindingUtil.inflate<FragmentHomeBinding>(
+            inflater,
+            R.layout.fragment_home,
+            container,
+            false
+        )
 
         // safe args
         val args: HomeFragmentArgs by navArgs()
@@ -43,12 +47,27 @@ class HomeFragment : Fragment() {
 
 
         binding.homeButton.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToFriendFragment("This msg passed from HomeFragment")
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToFriendFragment("This msg passed from HomeFragment")
 
             it.findNavController().navigate(action)
         }
 
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            view!!.findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 
 
