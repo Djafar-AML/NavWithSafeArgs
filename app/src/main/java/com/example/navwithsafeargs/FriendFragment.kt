@@ -31,6 +31,8 @@ class FriendFragment : Fragment() {
 
         Toast.makeText(context, args.FragmentName, Toast.LENGTH_SHORT).show()
 
+
+
         binding.friendButton.setOnClickListener {
 
             val action = FriendFragmentDirections.actionFriendFragmentToHomeFragment("This msg passed from FriendFragment")

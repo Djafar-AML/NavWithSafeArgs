@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
 import com.example.navwithsafeargs.databinding.FragmentHomeBinding
 
 
@@ -18,6 +19,7 @@ import com.example.navwithsafeargs.databinding.FragmentHomeBinding
  *
  */
 class HomeFragment : Fragment() {
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,10 +29,18 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
 
-        val args : HomeFragmentArgs by navArgs()
-//        if (args.CallerFragmentName != "Null"){
+        // safe args
+        val args: HomeFragmentArgs by navArgs()
+
+        if (args.CallerFragmentName != "Null") {
             Toast.makeText(context, args.CallerFragmentName, Toast.LENGTH_SHORT).show()
-//        }
+        }
+
+//        // update UI component with navigation UI
+//        val navController = findNavController()
+//        appBarConfiguration = AppBarConfiguration(navGraph = navController.graph)
+//        NavigationUI.setupActionBarWithNavController(activity , navController)
+
 
         binding.homeButton.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToFriendFragment("This msg passed from HomeFragment")

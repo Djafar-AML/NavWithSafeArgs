@@ -16,9 +16,9 @@
             app:popUpTo="@+id/homeFragment" />
         <argument
             android:name="CallerFragmentName"
+            android:defaultValue="Null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="Null" />
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -34,4 +34,11 @@
             android:name="FragmentName"
             android:defaultValue='"def fragment"' />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.example.navwithsafeargs.HelpFragment"
+        android:label="HelpFragment"
+        tools:layout="@layout/fragment_help"/>
 </navigation>
